@@ -1,0 +1,10 @@
+rootProject.name = 'retropia'
+
+/** Core Modules */
+include "core"
+include "gson"
+include "jaxb"
+include "test"
+
+/** Extensions */
+include "extensions:redis"
