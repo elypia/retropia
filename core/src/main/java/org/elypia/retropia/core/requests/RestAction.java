@@ -25,8 +25,6 @@ import java.util.*;
 import java.util.function.Consumer;
 
 /**
- * TODO: Fix duplicate code issue
- * TODO: Clean up making friendly exception for 400~500 codes
  * @param <T> The type of response this will return.
  * @author seth@elypia.org (Seth Falco)
  */
