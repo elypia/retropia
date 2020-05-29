@@ -32,9 +32,10 @@ public final class TestUtils {
     }
 
     /**
-     * @param name The name of the file to load excluding the extension.
+     * @param name The path to the resource to load.
      * @return The InputStream of the resource located at the specified path
-     * relative to the root of the classpath..
+     * relative to the root of the classpath.
+     * @throws NullPointerException If the resource doesn't exist.
      */
     public static InputStream getAsStream(String name) {
         Objects.requireNonNull(name);
@@ -54,12 +55,10 @@ public final class TestUtils {
 
     /**
      * Load all content from the file specified.
-     * File name should be named relative to the root of the classpath
-     * with <code>.json</code> extension omitted.
+     * Path should be relative to the root of the classpath.
      *
-     * @param name The name of the file to load excluding the extension.
+     * @param name The path to the resource to load.
      * @return The content of the file.
-     * @throws IOException If no resource if found at the path relative to the classpath root.
      */
     public static String getAsString(String name) throws IOException {
         try (InputStream stream = getAsStream(name)) {

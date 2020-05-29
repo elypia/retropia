@@ -34,12 +34,11 @@ public class ResourceLoaderExtension implements TestInstancePostProcessor {
         Collection<Field> fields = AnnotationSupport.findAnnotatedFields(testClazz, Resource.class);
 
         for (Field field : fields) {
-            Resource resource = field.getAnnotation(Resource.class);
-            String resourcePath = resource.value();
-
             if (field.get(testInstance) != null)
                 continue;
 
+            Resource resource = field.getAnnotation(Resource.class);
+            String resourcePath = resource.value();
             Class<?> fieldClazz = field.getType();
 
             if (fieldClazz == InputStream.class)

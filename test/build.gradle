@@ -16,4 +16,5 @@
 
 dependencies {
     implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    implementation "com.squareup.okhttp3:mockwebserver:${okhttpVersion}"
 }
