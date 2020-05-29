@@ -29,7 +29,7 @@ import java.util.*;
 public abstract class ApiWrapper {
 
     /** A list of extensions enabled for this wrapper. */
-    protected List<WrapperExtension> exts;
+    private List<WrapperExtension> exts;
 
     public ApiWrapper() {
         this(new WrapperExtension[0]);

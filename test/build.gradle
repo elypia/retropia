@@ -14,26 +14,6 @@
  * limitations under the License.
  */
 
-package org.elypia.retropia.jaxb;
-
-import retrofit2.converter.jaxb.JaxbConverterFactory;
-
-/**
- * Store global singleton {@link JaxbConverterFactory} instance.
- *
- * @author seth@elypia.org (Seth Falco)
- */
-public class JaxbService {
-
-    private static JaxbConverterFactory factory;
-
-    /**
-     * @return Get the global {@link JaxbConverterFactory} instance.
-     */
-    public static JaxbConverterFactory getInstance() {
-        if (factory == null)
-            factory = JaxbConverterFactory.create();
-
-        return factory;
-    }
+dependencies {
+    implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
 }

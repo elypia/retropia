@@ -26,7 +26,16 @@ import java.lang.reflect.Type;
 public class BitBooleanDeserializer implements JsonDeserializer<Boolean> {
 
     @Override
-    public Boolean deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return json.isJsonPrimitive() && json.getAsNumber().intValue() == 1;
+    public Boolean deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
+        if (!json.isJsonPrimitive())
+            throw new JsonParseException("Must be a JSON primitive.");
+
+        int number = json.getAsNumber().intValue();
+
+        switch (number) {
+            case 0: return false;
+            case 1: return true;
+            default: throw new JsonParseException("JSON Primitive is not a binary value.");
+        }
     }
 }

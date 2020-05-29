@@ -14,8 +14,8 @@ objects returned by Retrofit in a `RestInterface<?>` implementation, for example
 
 ```java
 public RestAction<DefineResult> define(String term) {
-	Call<DefineResult> call = service.define(term);
-	return new RestAction<>(call);
+    Call<DefineResult> call = service.define(term);
+    return new RestAction<>(call);
 }
 
 /** 
@@ -24,8 +24,8 @@ public RestAction<DefineResult> define(String term) {
  * users to check if the value is present.
  */
 public OptionalRestAction<DefineResult> define(String term) {
-	Call<DefineResult> call = service.define(term);
-	return new OptionalRestAction<>(call);
+    Call<DefineResult> call = service.define(term);
+    return new OptionalRestAction<>(call);
 }
 ```
 

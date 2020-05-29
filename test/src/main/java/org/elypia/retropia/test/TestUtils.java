@@ -32,19 +32,37 @@ public final class TestUtils {
     }
 
     /**
+     * @param name The name of the file to load excluding the extension.
+     * @return The InputStream of the resource located at the specified path
+     * relative to the root of the classpath..
+     */
+    public static InputStream getAsStream(String name) {
+        Objects.requireNonNull(name);
+        String path = File.separator + name;
+
+        InputStream stream = TestUtils.class.getResourceAsStream(path);
+        Objects.requireNonNull(stream, "Resource at `" + path + "`" + " doesn't exist.");
+
+        return stream;
+    }
+
+    public static byte[] getAsBytes(String name) throws IOException {
+        try (InputStream stream = getAsStream(name)) {
+            return stream.readAllBytes();
+        }
+    }
+
+    /**
      * Load all content from the file specified.
      * File name should be named relative to the root of the classpath
      * with <code>.json</code> extension omitted.
      *
      * @param name The name of the file to load excluding the extension.
      * @return The content of the file.
-     * @throws IOException If no resource if found at this path.
+     * @throws IOException If no resource if found at the path relative to the classpath root.
      */
-    public static String read(String name) throws IOException {
-        String path = File.separator + name;
-
-        try (InputStream stream = TestUtils.class.getResourceAsStream(path)) {
-            Objects.requireNonNull(stream, "Resource at `" + path + "`" + " doesn't exist.");
+    public static String getAsString(String name) throws IOException {
+        try (InputStream stream = getAsStream(name)) {
             return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         }
     }
