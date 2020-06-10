@@ -17,9 +17,6 @@
 package org.elypia.retropia.core;
 
 import okhttp3.OkHttpClient;
-import org.elypia.retropia.core.extensions.*;
-
-import java.util.List;
 
 /**
  * Store global singleton HTTP client instance.
@@ -27,33 +24,32 @@ import java.util.List;
  *
  * @author seth@elypia.org (Seth Falco)
  */
-public class RequestService {
+public final class HttpClientSingleton {
 
     private static OkHttpClient client;
+
+    private HttpClientSingleton() {
+        throw new IllegalStateException("Don't create an instance of this class.");
+    }
+
+    /**
+     * @return Return the global {@link #client OkHttpClient} instance.
+     */
+    public static OkHttpClient getClient() {
+        if (client == null)
+            client = new OkHttpClient();
+
+        return client;
+    }
 
     /**
      * This should be used when some runtime modifications
      * are required such as custom inceptors.
      *
-     * This doesn't include the {@link ExtensionInterceptor} itself
-     * as inceptor order might matter so each implementation should
-     * add it its self.
-     *
      * @return Get a builder that will share the same core
      * as the global {@link OkHttpClient} client.
      */
     public static OkHttpClient.Builder getBuilder() {
-        if (client == null)
-            client = new OkHttpClient();
-
-        return client.newBuilder();
-    }
-
-    public static OkHttpClient withExtensions(WrapperExtension... extensions) {
-        return withExtensions(List.of(extensions));
-    }
-
-    public static OkHttpClient withExtensions(Iterable<WrapperExtension> extensions) {
-        return getBuilder().addInterceptor(new ExtensionInterceptor(extensions)).build();
+        return getClient().newBuilder();
     }
 }

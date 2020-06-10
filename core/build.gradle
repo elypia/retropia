@@ -18,7 +18,4 @@ dependencies {
     // HTTP Client
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     api "com.squareup.okhttp3:okhttp:${okhttpVersion}"
-
-    // Testing
-    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttpVersion}"
 }

@@ -4,7 +4,6 @@ rootProject.name = 'retropia'
 include "core"
 include "gson"
 include "jaxb"
-include "test"
 
 /** Extensions */
-include "extensions:redis"
+include "interceptors:redis"

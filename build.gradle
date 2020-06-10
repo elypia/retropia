@@ -23,7 +23,7 @@ allprojects() {
     apply plugin: "jacoco"
 
     group = "org.elypia.retropia"
-    version = "1.2.0"
+    version = "1.3.0"
     description = "An extension for Retrofit to provide a subjectively cleaner interface and additional utilities."
 
     ext {
@@ -48,13 +48,11 @@ allprojects() {
 }
 
 def publishedProjects = [
-        project(":core"),
-        project(":gson"),
-        project(":jaxb"),
-        project(":test"),
+    project(":core"),
+    project(":gson"),
+    project(":jaxb"),
 
-        /** Extensions */
-        project(":extensions:redis")
+    project(":interceptors:redis")
 ]
 
 configure(publishedProjects) {

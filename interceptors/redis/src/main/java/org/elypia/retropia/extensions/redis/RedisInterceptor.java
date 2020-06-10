@@ -16,10 +16,9 @@
 
 package org.elypia.retropia.extensions.redis;
 
-import okhttp3.*;
 import okhttp3.Protocol;
 import okhttp3.Response;
-import org.elypia.retropia.core.extensions.WrapperExtension;
+import okhttp3.*;
 import redis.clients.jedis.*;
 
 import java.io.IOException;
@@ -28,7 +27,7 @@ import java.util.List;
 /**
  * @author seth@elypia.org (Seth Falco)
  */
-public class RedisExtension implements WrapperExtension {
+public class RedisInterceptor implements Interceptor {
 
     /** The connection to Redis. */
     private Jedis jedis;
@@ -36,13 +35,25 @@ public class RedisExtension implements WrapperExtension {
     /** The default TTL in seconds. */
     private int ttl;
 
-    public RedisExtension(JedisShardInfo info, int ttl) {
+    public RedisInterceptor(JedisShardInfo info, int ttl) {
         this(new Jedis(info), ttl);
     }
 
-    public RedisExtension(Jedis jedis, int ttl) {
+    public RedisInterceptor(Jedis jedis, int ttl) {
         this.jedis = jedis;
         this.ttl = ttl;
+    }
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request request = chain.request();
+        Response response = beforeRequest(request);
+
+        if (response != null)
+            return response;
+
+        response = chain.proceed(request);
+        return afterResponse(request, response);
     }
 
     /**
@@ -52,7 +63,6 @@ public class RedisExtension implements WrapperExtension {
      * @param request The request that was executed.
      * @return The response if a response is applicable.
      */
-    @Override
     public Response beforeRequest(Request request) throws IOException {
         if (!request.method().equals("GET"))
             return null;
@@ -83,7 +93,6 @@ public class RedisExtension implements WrapperExtension {
         }
     }
 
-    @Override
     public Response afterResponse(Request request, Response response) throws IOException {
         ResponseBody body = response.body();
 

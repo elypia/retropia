@@ -17,11 +17,12 @@
 package org.elypia.retropia.core.exceptions;
 
 /**
- * Friendly exceptions occur when the web API doesn't
- * use 4XX HTTP status codes to indicate failure but instead
- * return a 2XX status code with JSON description of the error.
+ * Friendly exceptions occur when the web API
+ * returns data in a different schema than expected, usually to
+ * represent some kind of error, such as an 2XX status code,
+ * response with an <code>error</code> property in the response.
  *
- * We'll wrap it in a FriendlyException with an description of what
+ * It can be wrapped in a FriendlyException with a description of what
  * happened and a unique tag so the receiver can handle it
  * appropriately.
  *
@@ -29,10 +30,10 @@ package org.elypia.retropia.core.exceptions;
  */
 public class FriendlyException extends RuntimeException {
 
-    /** A tag to identify the error. */
+    /** @see #getTag() */
     private final String tag;
 
-    /** If the tag associated with it is from the API, or internally managed. */
+    /** @see #isInternal() */
     private final boolean isInternal;
 
     /**
@@ -54,10 +55,16 @@ public class FriendlyException extends RuntimeException {
         this.isInternal = isInternal;
     }
 
+    /**
+     * @return A tag to identify the error.
+     */
     public String getTag() {
         return tag;
     }
 
+    /**
+     * @return If the tag associated with it is from the API, or internally managed.
+     */
     public boolean isInternal() {
         return isInternal;
     }
