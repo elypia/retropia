@@ -32,7 +32,7 @@ public class NestedDeserializer implements JsonDeserializer<Object> {
     private static Gson gson = new Gson();
 
     @Override
-    public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
         if (json.isJsonObject()) {
             JsonObject object = json.getAsJsonObject();
             Set<String> keys = object.keySet();

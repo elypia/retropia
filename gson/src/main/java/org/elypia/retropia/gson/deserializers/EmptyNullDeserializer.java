@@ -26,7 +26,7 @@ import java.lang.reflect.Type;
 public class EmptyNullDeserializer implements JsonDeserializer<String> {
 
     @Override
-    public String deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public String deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
         if (!json.isJsonNull()) {
             String string = json.getAsString();
 

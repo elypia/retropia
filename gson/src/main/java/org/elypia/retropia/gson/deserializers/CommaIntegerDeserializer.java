@@ -26,7 +26,7 @@ import java.lang.reflect.Type;
 public class CommaIntegerDeserializer implements JsonDeserializer<Integer> {
 
     @Override
-    public Integer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public Integer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
         if (!json.isJsonNull()) {
             String string = json.getAsString();
 
