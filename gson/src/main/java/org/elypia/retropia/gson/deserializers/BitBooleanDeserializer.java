@@ -17,6 +17,7 @@
 package org.elypia.retropia.gson.deserializers;
 
 import com.google.gson.*;
+import org.slf4j.*;
 
 import java.lang.reflect.Type;
 
@@ -25,10 +26,19 @@ import java.lang.reflect.Type;
  */
 public class BitBooleanDeserializer implements JsonDeserializer<Boolean> {
 
+    private static final Logger logger = LoggerFactory.getLogger(BitBooleanDeserializer.class);
+
     @Override
     public Boolean deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
         if (!json.isJsonPrimitive())
             throw new JsonParseException("Must be a JSON primitive.");
+
+        JsonPrimitive primitive = json.getAsJsonPrimitive();
+
+        if (primitive.isBoolean()) {
+            logger.debug("BitBooleanDeserliazer was used on a type that was a boolean anyways.");
+            return primitive.getAsBoolean();
+        }
 
         int number = json.getAsNumber().intValue();
 

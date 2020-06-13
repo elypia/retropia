@@ -23,7 +23,7 @@ allprojects() {
     apply plugin: "jacoco"
 
     group = "org.elypia.retropia"
-    version = "2.0.0"
+    version = "2.1.0"
     description = "An extension for Retrofit to provide utilities or generic classes and deserializers."
 
     ext {

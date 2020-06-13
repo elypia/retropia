@@ -5,9 +5,9 @@ The [Gradle]/[Maven] import strings can be found at the maven-central badge abov
 This is a small library that adds implementions and utilities on top of [Retrofit]
 and it's additional libraries.
 This provides a [Singleton] for the `OkHttpClient` available at
-`HttpClientSingleton`, provides deserializer implementions for 
-`Gson`, and `Jaxb`, generic exceptions API wrappers may want to throw,
-and `Interceptor` implementations like support for caching with Redis.
+`HttpClientSingleton`, generic `Interceptor` implementations for common
+use cases such as adding query parameters or redis caching, deserializer 
+implementions for `Gson`, and `Jaxb`, generic exceptions API wrappers may want to throw.
 
 The scope of this project may grow as more functionality or abstraction
 is desired.

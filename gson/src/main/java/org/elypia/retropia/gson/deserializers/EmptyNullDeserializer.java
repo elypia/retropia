@@ -27,7 +27,7 @@ public class EmptyNullDeserializer implements JsonDeserializer<String> {
 
     @Override
     public String deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
-        if (!json.isJsonNull()) {
+        if (json.isJsonPrimitive()) {
             String string = json.getAsString();
 
             if (!string.isEmpty())

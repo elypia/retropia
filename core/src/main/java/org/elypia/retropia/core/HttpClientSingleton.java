@@ -29,7 +29,7 @@ public final class HttpClientSingleton {
     private static OkHttpClient client;
 
     private HttpClientSingleton() {
-        throw new IllegalStateException("Don't create an instance of this class.");
+        throw new IllegalStateException("Don't create a");
     }
 
     /**

@@ -26,9 +26,6 @@ import java.util.Set;
  */
 public class NestedDeserializer implements JsonDeserializer<Object> {
 
-    private static final String OBJECT_ERROR = "Don't use nested deserializer when there is more than one nested object.";
-    private static final String ARRAY_ERROR = "Don't use nested deserializer when there can be more than one element in the array.";
-
     private static Gson gson = new Gson();
 
     @Override
@@ -38,7 +35,7 @@ public class NestedDeserializer implements JsonDeserializer<Object> {
             Set<String> keys = object.keySet();
 
             if (keys.size() > 1)
-                throw new IllegalArgumentException(OBJECT_ERROR);
+                throw new JsonParseException("Don't use nested deserializer when there is more than one nested object.");
 
             String key = keys.iterator().next();
             return gson.fromJson(object.get(key), typeOfT);
@@ -48,11 +45,11 @@ public class NestedDeserializer implements JsonDeserializer<Object> {
             JsonArray array = json.getAsJsonArray();
 
             if (array.size() > 1)
-                throw new IllegalArgumentException(ARRAY_ERROR);
+                throw new JsonParseException("Don't use nested deserializer when there can be more than one element in the array.");
 
             return gson.fromJson(array.get(0), typeOfT);
         }
 
-        return null;
+        throw new JsonParseException("Element is not of type object or array.");
     }
 }

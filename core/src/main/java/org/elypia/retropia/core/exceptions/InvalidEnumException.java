@@ -27,7 +27,7 @@ public class InvalidEnumException extends RuntimeException {
 
     /**
      * @param enumValue The enum constant which is causing the problem.
-     * @param message A friendly default error message which can be safely printed.
+     * @param message An explanation of the exception.
      */
     public InvalidEnumException(Enum<?> enumValue, String message) {
         super(message);

@@ -23,8 +23,7 @@ import java.text.*;
 import java.util.*;
 
 /**
- * Convert date parse by the specified pattern or as unix time
- * if no format is specified.
+ * Convert date parse by the specified pattern.
  *
  * @author seth@elypia.org (Seth Falco)
  */
@@ -34,36 +33,28 @@ public class DateAdapter extends XmlAdapter<String, Date> {
 
     private SimpleDateFormat format;
 
-    /** Use unix time instead of a date format. */
-    public DateAdapter() {
-        this(null);
-    }
-
     /**
-     * @param formatString The date format, or null if unix time.
+     * @param formatString The date format.
      */
     public DateAdapter(String formatString) {
-        if (formatString == null)
-            return;
-
-        format = new SimpleDateFormat(formatString);
+        this(new SimpleDateFormat(formatString));
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    @Override
-    public Date unmarshal(String v) {
-        Objects.requireNonNull(v);
+    public DateAdapter(SimpleDateFormat format) {
+        this.format = Objects.requireNonNull(format);
+    }
 
-        if (format == null)
-            return new Date(Long.valueOf(v));
+    @Override
+    public Date unmarshal(String dateString) {
+        if (dateString == null)
+            return null;
 
         try {
-            return format.parse(v);
+            return format.parse(dateString);
         } catch (ParseException ex) {
-            logger.error("Unable to parse date string as Date.", ex);
+            throw new IllegalArgumentException("Unable to parse date in the required format.");
         }
-
-        return null;
     }
 
     @Override
