@@ -29,7 +29,7 @@ make sure to get it sorted.
 [Singleton]: https://en.wikipedia.org/wiki/Singleton_pattern "Singleton Pattern"
 [Elypiai]: https://gitlab.com/Elypia/elypiai "Elypiai on GitLab"
 
-[Matrix]: https://img.shields.io/matrix/elypia-general:matrix.org?logo=matrix "Matrix Shield"
+[Matrix]: https://img.shields.io/matrix/elypia:matrix.org?logo=matrix "Matrix Shield"
 [Discord]: https://discord.com/api/guilds/184657525990359041/widget.png "Discord Shield"
 [Maven Central]: https://img.shields.io/maven-central/v/org.elypia.retropia/core "Download Shield"
 [Docs]: https://img.shields.io/badge/docs-retropia-blue.svg "Documentation Shield"

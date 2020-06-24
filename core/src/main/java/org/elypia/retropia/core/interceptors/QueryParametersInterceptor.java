@@ -40,11 +40,11 @@ public class QueryParametersInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        HttpUrl.Builder builder = request.url().newBuilder();
-        queryParameters.forEach(builder::addQueryParameter);
+        HttpUrl.Builder urlBuilder = request.url().newBuilder();
+        queryParameters.forEach(urlBuilder::addQueryParameter);
 
-        HttpUrl url = builder.build();
-        request = request.newBuilder().url(url).build();
-        return chain.proceed(request);
+        HttpUrl url = urlBuilder.build();
+        Request newRequest = request.newBuilder().url(url).build();
+        return chain.proceed(newRequest);
     }
 }
