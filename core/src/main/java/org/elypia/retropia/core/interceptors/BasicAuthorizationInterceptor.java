@@ -9,10 +9,7 @@ import java.util.Base64;
  * @author seth@elypia.org (Seth Falco)
  * @since 2.2.0
  */
-public class BasicAuthorizationInterceptor extends HeadersInterceptor {
-
-    /** Name of the authorization header. */
-    private static final String KEY = "Authorization";
+public class BasicAuthorizationInterceptor extends AuthorizationInterceptor {
 
     /** Static Base64 encoder instance. */
     private static final Base64.Encoder encoder = Base64.getEncoder();
@@ -54,6 +51,6 @@ public class BasicAuthorizationInterceptor extends HeadersInterceptor {
      * @param base64Bytes The base64 to use for authentication as bytes.
      */
     public BasicAuthorizationInterceptor(byte[] base64Bytes) {
-        super(KEY, "Basic " + encoder.encodeToString(base64Bytes));
+        super("Basic", encoder.encodeToString(base64Bytes));
     }
 }
